@@ -9,13 +9,13 @@
 
 * **OS:** macOS (Apple Silicon M1)
 * **Shell / Terminal:** zsh
-* **Docker 버전:** (OrbStack 설치 후 기입 예정)
-* **Git 버전:** (git --version 결과 기입)
+* **Docker 버전:** Docker version 29.4.0, build 9d7ad9f
+* **Git 버전:** git version 2.51.2
 
 ## 3. 수행 항목 체크리스트
 
 - [x] 터미널 기본 명령어 실습
-- [x] 파일 및 디렉토리 권한 제어 실습
+- [x] 파일 및 디렉토리 권한 
 - [x] Docker 데몬 설치 및 기본 동작 점검
 - [x] Dockerfile 기반 커스텀 이미지 제작
 - [x] 포트 매핑 및 브라우저 접속 검증
