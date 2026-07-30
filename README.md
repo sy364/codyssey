@@ -1,16 +1,19 @@
 # 개발 워크스테이션 구축 미션
 
 ## 1. 프로젝트 개요
+
 * **목표:** 터미널 환경 제어, Docker를 활용한 컨테이너 기반 실행 환경 구축 및 Git/GitHub를 통한 버전 관리 경험.
 * **주요 내용:** 리눅스 CLI 조작, 커스텀 컨테이너 이미지 빌드 및 실행, 포트 매핑과 볼륨 마운트 검증.
 
 ## 2. 실행 환경
+
 * **OS:** macOS (Apple Silicon M1)
 * **Shell / Terminal:** zsh
 * **Docker 버전:** (OrbStack 설치 후 기입 예정)
 * **Git 버전:** (git --version 결과 기입)
 
 ## 3. 수행 항목 체크리스트
+
 - [x] 터미널 기본 명령어 실습
 - [x] 파일 및 디렉토리 권한 제어 실습
 - [x] Docker 데몬 설치 및 기본 동작 점검
@@ -22,11 +25,11 @@
 ## 4. 터미널 조작 및 권한 실습 로그
 
 ### 4.1 터미널 기본 조작 (생성, 확인 등)
+
 **검증 방법:** `vi`, `mkdir` 명령어로 파일과 폴더를 생성하고 `ls -al`로 확인.
 
 ```bash
-# 명령어 및 출력 결과 기입
-kimseyun@gimseyun-ui-MacBookPro ~ % git clone [https://github.com/sy364/codyssey.git](https://github.com/sy364/codyssey.git)
+kimseyun@gimseyun-ui-MacBookPro ~ % git clone https://github.com/sy364/codyssey.git
 'codyssey'에 복제합니다...
 warning: 빈 저장소를 복제한 것처럼 보입니다.
 kimseyun@gimseyun-ui-MacBookPro ~ % cd codyssey
@@ -40,7 +43,7 @@ core.bare=false
 core.logallrefupdates=true
 core.ignorecase=true
 core.precomposeunicode=true
-remote.origin.url=[https://github.com/sy364/codyssey.git](https://github.com/sy364/codyssey.git)
+remote.origin.url=https://github.com/sy364/codyssey.git
 remote.origin.fetch=+refs/heads/*:refs/remotes/origin/*
 branch.main.remote=origin
 branch.main.merge=refs/heads/main
@@ -55,7 +58,7 @@ drwxr-xr-x   9 kimseyun  staff   288  7 28 20:32 .git
 -rw-r--r--   1 kimseyun  staff     0  7 28 20:37 README.md
 drwxr-xr-x   3 kimseyun  staff    96  7 28 20:38 test_dir
 kimseyun@gimseyun-ui-MacBookPro codyssey % chmod 755 test_dir
-kimseyun@gimseyun-ui-MacBookPro codyssey % chmod 644 test_dir/test.txt 
+kimseyun@gimseyun-ui-MacBookPro codyssey % chmod 644 test_dir/test.txt
 kimseyun@gimseyun-ui-MacBookPro codyssey % ls -al
 total 0
 drwxr-xr-x   5 kimseyun  staff   160  7 28 20:38 .
@@ -70,16 +73,17 @@ drwxr-xr-x  5 kimseyun  staff  160  7 28 20:38 ..
 -rw-r--r--  1 kimseyun  staff    0  7 28 20:38 test.txt
 kimseyun@gimseyun-ui-MacBookPro codyssey % pwd
 /Users/kimseyun/codyssey
-kimseyun@gimseyun-ui-MacBookPro codyssey % cp test_dir/test.txt test_dir/copy.txt  
+kimseyun@gimseyun-ui-MacBookPro codyssey % cp test_dir/test.txt test_dir/copy.txt
 kimseyun@gimseyun-ui-MacBookPro codyssey % mv test_dir/copy.txt test_dir/rename.txt
-kimseyun@gimseyun-ui-MacBookPro codyssey % cat test_dir/rename.txt 
-kimseyun@gimseyun-ui-MacBookPro codyssey % rm test_dir/rename.txt 
+kimseyun@gimseyun-ui-MacBookPro codyssey % cat test_dir/rename.txt
+kimseyun@gimseyun-ui-MacBookPro codyssey % rm test_dir/rename.txt
 kimseyun@gimseyun-ui-MacBookPro codyssey % ls
 README.md	test_dir
 ```
 
 ## 5. Docker 설치 및 기본 점검
-**검증 방법:** 'docker --version'과 'docker info' 명령어로 설치
+
+**검증 방법:** `docker --version`과 `docker info` 명령어로 설치 확인.
 
 ```bash
 kimseyun@gimseyun-ui-MacBookPro codyssey % docker --version
@@ -179,8 +183,8 @@ Server:
  ID: 27ad8d19-469a-4857-92d5-7e697e735d29
  Docker Root Dir: /var/lib/docker
  Debug Mode: false
- HTTP Proxy: [http://proxy.orb.internal:8305](http://proxy.orb.internal:8305)
- HTTPS Proxy: [http://proxy.orb.internal:8305](http://proxy.orb.internal:8305)
+ HTTP Proxy: http://proxy.orb.internal:8305
+ HTTPS Proxy: http://proxy.orb.internal:8305
  No Proxy: localhost,127.0.0.1,127.0.0.0/8,::1,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16,0.250.250.0/24,*.orb.internal,*.local,gateway.docker.internal,host.internal,host.docker.internal,host.lima.internal,docker.for.mac.localhost,docker.for.mac.host.internal
  Experimental: true
  Insecure Registries:
@@ -226,19 +230,20 @@ WARNING: DOCKER_INSECURE_NO_IPTABLES_RAW is set
 ```
 
 ## 6. Docker 기본 운영 명령 수행
+
 ```bash
 kimseyun@gimseyun-ui-MacBookPro codyssey % docker pull nginx
 Using default tag: latest
 latest: Pulling from library/nginx
-9f270a0f328f: Pull complete 
-59f54fbcd984: Pull complete 
-54c3b3bebc0a: Pull complete 
-9b1a2f3b8553: Pull complete 
-627a5a63361a: Pull complete 
-4cca0d328dc5: Pull complete 
-94f27359a4c8: Pull complete 
-d07ed3315b0d: Download complete 
-52efd73ccaa6: Download complete 
+9f270a0f328f: Pull complete
+59f54fbcd984: Pull complete
+54c3b3bebc0a: Pull complete
+9b1a2f3b8553: Pull complete
+627a5a63361a: Pull complete
+4cca0d328dc5: Pull complete
+94f27359a4c8: Pull complete
+d07ed3315b0d: Download complete
+52efd73ccaa6: Download complete
 Digest: sha256:5a88c9c45479443d7be2eadc894b4ed0a9801bae03d97a5760ae13b5c2005942
 Status: Downloaded newer image for nginx:latest
 docker.io/library/nginx:latest
@@ -248,7 +253,7 @@ What's next:
 kimseyun@gimseyun-ui-MacBookPro codyssey % docker images
                                                                 i Info →   U  In Use
 IMAGE          ID             DISK USAGE   CONTENT SIZE   EXTRA
-nginx:latest   5a88c9c45479        258MB         64.3MB        
+nginx:latest   5a88c9c45479        258MB         64.3MB
 kimseyun@gimseyun-ui-MacBookPro codyssey % docker run -d --name test-nginx nginx
 64221f675a5eb008a5ec91fc904b1e4d156d6148320e447580dd7b0b94e2fa57
 kimseyun@gimseyun-ui-MacBookPro codyssey % docker ps
@@ -266,7 +271,7 @@ kimseyun@gimseyun-ui-MacBookPro codyssey % docker logs test-nginx
 /docker-entrypoint.sh: Configuration complete; ready for start up
 2026/07/28 12:31:15 [notice] 1#1: using the "epoll" event method
 2026/07/28 12:31:15 [notice] 1#1: nginx/1.31.3
-2026/07/28 12:31:15 [notice] 1#1: built by gcc 14.2.0 (Debian 14.2.0-19) 
+2026/07/28 12:31:15 [notice] 1#1: built by gcc 14.2.0 (Debian 14.2.0-19)
 2026/07/28 12:31:15 [notice] 1#1: OS: Linux 7.0.11-orbstack-00360-gc9bc4d96ac70
 2026/07/28 12:31:15 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 20480:1048576
 2026/07/28 12:31:15 [notice] 1#1: start worker processes
@@ -281,7 +286,7 @@ kimseyun@gimseyun-ui-MacBookPro codyssey % docker logs test-nginx
 kimseyun@gimseyun-ui-MacBookPro codyssey % docker ps
 CONTAINER ID   IMAGE     COMMAND                   CREATED          STATUS          PORTS     NAMES
 64221f675a5e   nginx     "/docker-entrypoint.…"   28 minutes ago   Up 28 minutes   80/tcp    test-nginx
-kimseyun@gimseyun-ui-MacBookPro codyssey % docker logs test-nginx 
+kimseyun@gimseyun-ui-MacBookPro codyssey % docker logs test-nginx
 /docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
 /docker-entrypoint.sh: Looking for shell scripts in /docker-entrypoint.d/
 /docker-entrypoint.sh: Launching /docker-entrypoint.d/10-listen-on-ipv6-by-default.sh
@@ -293,7 +298,7 @@ kimseyun@gimseyun-ui-MacBookPro codyssey % docker logs test-nginx
 /docker-entrypoint.sh: Configuration complete; ready for start up
 2026/07/28 12:31:15 [notice] 1#1: using the "epoll" event method
 2026/07/28 12:31:15 [notice] 1#1: nginx/1.31.3
-2026/07/28 12:31:15 [notice] 1#1: built by gcc 14.2.0 (Debian 14.2.0-19) 
+2026/07/28 12:31:15 [notice] 1#1: built by gcc 14.2.0 (Debian 14.2.0-19)
 2026/07/28 12:31:15 [notice] 1#1: OS: Linux 7.0.11-orbstack-00360-gc9bc4d96ac70
 2026/07/28 12:31:15 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 20480:1048576
 2026/07/28 12:31:15 [notice] 1#1: start worker processes
@@ -308,11 +313,12 @@ kimseyun@gimseyun-ui-MacBookPro codyssey % docker logs test-nginx
 kimseyun@gimseyun-ui-MacBookPro codyssey % docker stats --no-stream
 CONTAINER ID   NAME         CPU %     MEM USAGE / LIMIT     MEM %     NET I/O         BLOCK I/O         PIDS
 64221f675a5e   test-nginx   0.00%     7.762MiB / 7.818GiB   0.10%     1.66kB / 126B   15.8MB / 8.19kB   9
-kimseyun@gimseyun-ui-MacBookPro codyssey % docker stop test-nginx 
+kimseyun@gimseyun-ui-MacBookPro codyssey % docker stop test-nginx
 test-nginx
 ```
 
 ## 7. 컨테이너 실행 실습
+
 ```bash
 kimseyun@gimseyun-ui-MacBookPro codyssey % docker run hello-world
 
@@ -332,20 +338,20 @@ To try something more ambitious, you can run an Ubuntu container with:
  $ docker run -it ubuntu bash
 
 Share images, automate workflows, and more with a free Docker ID:
- [https://hub.docker.com/](https://hub.docker.com/)
+ https://hub.docker.com/
 
 For more examples and ideas, visit:
- [https://docs.docker.com/get-started/](https://docs.docker.com/get-started/)
+ https://docs.docker.com/get-started/
 
 kimseyun@gimseyun-ui-MacBookPro codyssey % docker run -it ubuntu bash
 Unable to find image 'ubuntu:latest' locally
 latest: Pulling from library/ubuntu
-693710ba2039: Pull complete 
-55237ac9880d: Pull complete 
-fdfb14aa961e: Download complete 
+693710ba2039: Pull complete
+55237ac9880d: Pull complete
+fdfb14aa961e: Download complete
 Digest: sha256:3131b4cc82a783df6c9df078f86e01819a13594b865c2cad47bd1bca2b7063bb
 Status: Downloaded newer image for ubuntu:latest
-root@2f00464a02af:/# 
+root@2f00464a02af:/#
 root@2f00464a02af:/# ls
 bin   dev  home  media  opt   root  sbin  sys  usr
 boot  etc  lib   mnt    proc  run   srv   tmp  var
@@ -354,20 +360,24 @@ hello from ubuntu
 root@2f00464a02af:/# exit
 exit
 ```
+
 **attach와 exec 차이점**
+
 * **attach**: 컨테이너의 메인 프로세스(PID1)에 현재 터미널을 직접 연결한다. 접속 상태에서 종료(exit) 시 메인 프로세스가 함께 종료되므로 컨테이너 전체가 멈춘다.
 * **exec**: 이미 백그라운드에서 실행 중인 컨테이너 환경 내부에 새로운 별도 프로세스(쉘 등)를 생성해 접속한다. 작업을 마치고 exit로 빠져나와도 해당 쉘만 종료되며, 컨테이너의 원래 메인 프로세스는 계속 실행 상태를 유지한다.
 
 ## 8. 기존 Dockerfile 기반 커스텀 이미지 제작 및 포트 매핑
 
-**1. 선택한 베이스 이미지**
+### 8.1 선택한 베이스 이미지
+
 * (A) 웹 서버 베이스 이미지 활용 (`nginx:latest`)
 
-**2. 커스텀 포인트 및 목적**
+### 8.2 커스텀 포인트 및 목적
+
 * **커스텀 포인트:** Dockerfile의 `COPY` 명령어를 사용하여 로컬에 생성한 `index.html` 파일을 컨테이너 내부 NGINX의 기본 서비스 경로(`/usr/share/nginx/html/index.html`)로 덮어씌움.
 * **목적:** 기존 NGINX 웹 서버의 통신 기능은 유지하면서, 접속 시 출력되는 화면을 사용자가 직접 작성한 정적 웹페이지(Hello Codyssey Custom Image)로 교체하여 서비스하기 위함.
 
-**3. 빌드/실행 명령 및 접속 증거 로그**
+### 8.3 빌드/실행 명령 및 접속 증거 로그
 
 ```bash
 # 1. 정적 콘텐츠 파일 생성 및 Dockerfile 작성
@@ -403,15 +413,24 @@ kimseyun@gimseyun-ui-MacBookPro codyssey % docker run -d -p 8080:80 --name my-we
 # 4. 포트 매핑 및 브라우저 접속 증거 (curl 응답)
 kimseyun@gimseyun-ui-MacBookPro codyssey % curl http://localhost:8080
 <h1>Hello Codyssey Custom Image</h1>
-```
 
-## 9. Docker 볼륨 영속성 검증
+# 디렉토리 생성 및 바인드 마운트로 컨테이너 실행
+kimseyun@gimseyun-ui-MacBookPro codyssey % mkdir -p ~/codyssey/bind_test
+kimseyun@gimseyun-ui-MacBookPro codyssey % echo "Original Host File" > ~/codyssey/bind_test/index.html
+kimseyun@gimseyun-ui-MacBookPro codyssey % docker run -d -p 8082:80 --name bind-nginx -v ~/codyssey/bind_test:/usr/share/nginx/html nginx
+8e36282b24347ff19ac5e9bfb7d74cfd9ed7c6c1c5f8b6c3898e4c563329d83d
 
-**검증 방법:** 도커 볼륨을 생성해 컨테이너 내부 경로에 마운트하여 파일을 생성한 뒤, 해당 컨테이너를 삭제하고 새로운 컨테이너에 동일한 볼륨을 연결하여 데이터가 유지됨을 확인.
+# 호스트 파일 변경 전 접속 확인
+kimseyun@gimseyun-ui-MacBookPro codyssey % curl http://localhost:8082
+Original Host File
 
-**[생성/연결/검증 절차 및 출력 로그]**
+# 호스트 파일 내용 변경
+kimseyun@gimseyun-ui-MacBookPro codyssey % echo "Changed from Host Computer" > ~/codyssey/bind_test/index.html
 
-```bash
+# 컨테이너 재시작 없이 즉시 변경 사항 반영 확인
+kimseyun@gimseyun-ui-MacBookPro codyssey % curl http://localhost:8082
+Changed from Host Computer
+
 # 1. 볼륨 생성 및 데이터 기록
 kimseyun@gimseyun-ui-MacBookPro codyssey % docker volume create my-data
 my-data
@@ -427,6 +446,7 @@ kimseyun@gimseyun-ui-MacBookPro codyssey % docker rm vol-writer
 vol-writer
 kimseyun@gimseyun-ui-MacBookPro codyssey % docker ps -a
 CONTAINER ID   IMAGE             COMMAND                   CREATED             STATUS                         PORTS                                     NAMES
+8e36282b2434   nginx             "/docker-entrypoint.…"   2 minutes ago       Up 2 minutes                   0.0.0.0:8082->80/tcp, [::]:8082->80/tcp   bind-nginx
 4bb8fe1ce111   my-custom-nginx   "/docker-entrypoint.…"   17 minutes ago      Up 17 minutes                  0.0.0.0:8080->80/tcp, [::]:8080->80/tcp   my-web
 2f00464a02af   ubuntu            "bash"                    50 minutes ago      Exited (0) 48 minutes ago                                                interesting_shtern
 6816673f2cd5   hello-world       "/hello"                  51 minutes ago      Exited (0) 51 minutes ago                                                sleepy_keller
@@ -438,9 +458,7 @@ kimseyun@gimseyun-ui-MacBookPro codyssey % docker run -it --name vol-reader -v m
 permanent data saved
 ```
 
-## 10. Git 설정 및 GitHub 연동
-
-**Git 사용자 설정 결과 (`git config --list`)**
+## 9. Git 사용자 설정 및 GitHub 저장소 연동
 
 ```bash
 kimseyun@gimseyun-ui-MacBookPro codyssey % git config --global user.name "kimseyun"
@@ -457,10 +475,50 @@ core.bare=false
 core.logallrefupdates=true
 core.ignorecase=true
 core.precomposeunicode=true
-remote.origin.url=[https://github.com/sy364/codyssey.git](https://github.com/sy364/codyssey.git)
+remote.origin.url=https://github.com/sy364/codyssey.git
 remote.origin.fetch=+refs/heads/*:refs/remotes/origin/*
 branch.main.remote=origin
 branch.main.merge=refs/heads/main
 ```
-**GitHub 연동 증거**
-![GitHub 연동 증거](./github_proof.png)
+
+
+
+## 10. 트러블슈팅
+
+### Case 1: 컨테이너 이름 중복 에러
+
+**문제**
+커스텀 이미지를 빌드하고 `docker run -d -p 8080:80 --name my-web my-custom-nginx` 명령어로 컨테이너를 실행하려 했을 때, 다음과 같은 에러가 발생하며 실행이 중단됨.
+
+```
+docker: Error response from daemon: Conflict. The container name "/my-web" is already in use by container...
+```
+
+**원인 가설**
+이전에 동일한 이름(`my-web`)으로 컨테이너를 실행해 두었고, 해당 컨테이너가 삭제되지 않고 백그라운드에 남아있어 이름 충돌이 발생했을 것이다.
+
+**확인**
+`docker ps -a` 명령어를 입력하여 현재 존재하는 컨테이너 목록과 이름을 조회해 중복 여부를 파악함.
+
+**해결/대안**
+`docker rm -f my-web` 명령어로 기존에 있던 컨테이너를 강제 삭제한 뒤 다시 실행하거나, `docker run` 시 `--name my-web2`와 같이 다른 이름을 부여하여 해결.
+
+---
+
+### Case 2: 리눅스 쉘(bash) 띄어쓰기 문법 오류
+
+**문제**
+우분투 컨테이너 내부에서 텍스트 파일을 생성하기 위해 `echo"permanent data saved" > /app/test.txt`를 실행했으나, 다음과 같은 에러가 발생함.
+
+```
+bash: echopermanent data saved: command not found
+```
+
+**원인 가설**
+리눅스 쉘은 띄어쓰기를 기준으로 명령어와 뒤에 오는 인자(값)를 구분하는데, 띄어쓰기를 생략하여 쉘이 `echopermanent` 전체를 하나의 명령어로 인식했을 것이다.
+
+**확인**
+에러 메시지가 `echo`가 아닌 `echopermanent`를 찾을 수 없다고 출력된 것을 통해 띄어쓰기 부재로 인한 파싱 오류임을 확인함.
+
+**해결/대안**
+명령어와 큰따옴표 사이에 스페이스바를 한 칸 추가하여 `echo "permanent data saved" > /app/test.txt`로 수정 후 실행하여 정상적으로 파일을 생성함.
